@@ -1,0 +1,16 @@
+{
+    "type": "FeatureCollection",
+    "name": "wisatakabupaten",
+    "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+    "features": [
+    { "type": "Feature", "properties": { "Name": "Gunung Andong", "Alamat": "Desa Tlogorejo, Kecamatan Grabag" }, "geometry": { "type": "Point", "coordinates": [ 110.370287749000056, -7.389994144999946, 0.0 ] } },
+    { "type": "Feature", "properties": { "Name": "Nepal Van Java", "Alamat": "Desa Temanggung, Kecamatan Kaliangkrik" }, "geometry": { "type": "Point", "coordinates": [ 110.077245308000045, -7.420707030999949, 0.0 ] } },
+    { "type": "Feature", "properties": { "Name": "Air Terjun Sekar langit", "Alamat": "Desa Tlogorejo, Kecamatan Grabag" }, "geometry": { "type": "Point", "coordinates": [ 110.357367326000087, -7.366800201999979, 0.0 ] } },
+    { "type": "Feature", "properties": { "Name": "Punthuk Setumpu", "Alamat": "Desa Jatimulyo, Kecamatan Dukun" }, "geometry": { "type": "Point", "coordinates": [ 110.177628568000046, -7.607289894999951, 0.0 ] } },
+    { "type": "Feature", "properties": { "Name": "Hutan Pinus Kragilan", "Alamat": "Desa Pogalan, Kecamatan Pakis" }, "geometry": { "type": "Point", "coordinates": [ 110.383949604000065, -7.46109581199994, 0.0 ] } },
+    { "type": "Feature", "properties": { "Name": "Curug Silawe", "Alamat": "Desa Sutopati, Kecamatan Kajoran" }, "geometry": { "type": "Point", "coordinates": [ 110.072647608000068, -7.458348745999956, 0.0 ] } },
+    { "type": "Feature", "properties": { "Name": "Telaga Bleder", "Alamat": "Desa Ngasinan, Kecamatan Grabag" }, "geometry": { "type": "Point", "coordinates": [ 110.346372175000056, -7.383671904999972, 0.0 ] } },
+    { "type": "Feature", "properties": { "Name": "Gunung Merbabu", "Alamat": "Desa Banyuroto, Kecamatan Sawangan" }, "geometry": { "type": "Point", "coordinates": [ 110.439094987000033, -7.453642024999965, 0.0 ] } }
+    ]
+    }
+    
