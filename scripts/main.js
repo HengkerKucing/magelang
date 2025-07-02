@@ -62,15 +62,23 @@ function initializeNavigation() {
 
 // Scroll effects and animations
 function initializeScrollEffects() {
-  // Smooth scrolling for anchor links
+  // Smooth scrolling for anchor links with navbar offset
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener("click", function (e) {
       e.preventDefault()
       const target = document.querySelector(this.getAttribute("href"))
       if (target) {
-        target.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
+        // Get navbar height for offset
+        const navbar = document.getElementById("navbar")
+        const navbarHeight = navbar ? navbar.offsetHeight : 80
+        
+        // Calculate scroll position with offset
+        const elementPosition = target.getBoundingClientRect().top + window.pageYOffset
+        const offsetPosition = elementPosition - navbarHeight - 20 // 20px extra padding
+        
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth"
         })
       }
     })
@@ -300,9 +308,17 @@ function trackEvent(category, action, label) {
 function scrollToSection(sectionId) {
   const section = document.getElementById(sectionId)
   if (section) {
-    section.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
+    // Get navbar height for offset
+    const navbar = document.getElementById("navbar")
+    const navbarHeight = navbar ? navbar.offsetHeight : 80
+    
+    // Calculate scroll position with offset
+    const elementPosition = section.getBoundingClientRect().top + window.pageYOffset
+    const offsetPosition = elementPosition - navbarHeight - 20 // 20px extra padding
+    
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: "smooth"
     })
   }
 }

@@ -1001,24 +1001,42 @@ body {
 .map-legend {
   position: absolute;
   top: 20px;
-  right: 20px;
-  background: var(--text-white);
-  padding: 1rem;
-  border-radius: var(--border-radius);
-  box-shadow: var(--shadow);
-  z-index: 1000;
+  left: 80px;
+  background: rgba(255, 255, 255, 0.98) !important;
+  padding: 0.75rem !important;
+  border-radius: var(--border-radius) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+  z-index: 500 !important;
+  backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  min-width: 160px !important;
+  max-width: 160px !important;
 }
 
 .map-legend h4 {
-  margin-bottom: 0.5rem;
-  font-size: 1rem;
+  margin-bottom: 0.5rem !important;
+  font-size: 0.9rem !important;
+  color: #1f2937 !important;
+  font-weight: 600 !important;
+  text-align: center !important;
 }
 
 .legend-item {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 0.5rem;
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  margin-bottom: 0.5rem !important;
+  padding: 0.1rem 0 !important;
+}
+
+.legend-item:last-child {
+  margin-bottom: 0 !important;
+}
+
+.legend-item span {
+  color: #374151 !important;
+  font-size: 0.9rem !important;
+  font-weight: 500 !important;
 }
 
 .legend-marker {
@@ -1028,15 +1046,82 @@ body {
 }
 
 .legend-marker.tourist {
-  background: var(--primary-color);
+  background: #4caf50 !important;
 }
 
 .legend-marker.mountain {
-  background: var(--secondary-color);
+  background: #2196f3 !important;
 }
 
 .legend-marker.waterfall {
-  background: var(--accent-color);
+  background: #ff9800 !important;
+}
+
+/* Map popup styling - ensure text is visible */
+.leaflet-popup-content-wrapper {
+  background: rgba(255, 255, 255, 0.98) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2) !important;
+  backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+.leaflet-popup-content {
+  margin: 16px !important;
+  line-height: 1.5 !important;
+  color: #1f2937 !important;
+}
+
+.map-popup {
+  min-width: 200px !important;
+  text-align: center !important;
+}
+
+.map-popup h4 {
+  margin: 0 0 12px 0 !important;
+  color: #1f2937 !important;
+  font-size: 1.1rem !important;
+  font-weight: 600 !important;
+}
+
+.map-popup p {
+  margin: 0 0 16px 0 !important;
+  color: #4b5563 !important;
+  font-size: 0.9rem !important;
+  line-height: 1.4 !important;
+}
+
+.leaflet-popup-tip {
+  background: rgba(255, 255, 255, 0.98) !important;
+}
+
+/* Map section scroll offset untuk navbar */
+#peta {
+  scroll-margin-top: 80px !important;
+}
+
+/* Leaflet controls z-index fix */
+.leaflet-control-container {
+  z-index: 400 !important;
+}
+
+.leaflet-control {
+  z-index: 400 !important;
+}
+
+/* Map title control z-index */
+.map-title-control {
+  z-index: 450 !important;
+}
+
+/* Ensure navbar is always on top */
+.navbar {
+  z-index: 1000 !important;
+}
+
+/* Map watermark z-index */
+.map-watermark {
+  z-index: 400 !important;
 }
 
 /* Contact Section */

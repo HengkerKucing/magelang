@@ -189,14 +189,14 @@ function addTouristAttractions() {
 
 function getMarkerIcon(type) {
   const iconColors = {
-    tourist: "#4caf50",
-    mountain: "#2196f3",
-    waterfall: "#ff9800",
+    tourist: "#4caf50",    // Hijau - Objek Wisata
+    mountain: "#2196f3",   // Biru - Gunung  
+    waterfall: "#ff9800",  // Orange - Air Terjun
   }
 
   return L.divIcon({
     className: "custom-marker",
-    html: `<div style="background-color: ${iconColors[type] || "#4caf50"}; width: 20px; height: 20px; border-radius: 50%; border: 2px solid white; box-shadow: 0 2px 4px rgba(0,0,0,0.3);"></div>`,
+    html: `<div style="background-color: ${iconColors[type] || "#4caf50"}; width: 20px; height: 20px; border-radius: 50%; border: 2px solid white; box-shadow: 0 2px 6px rgba(0,0,0,0.4);"></div>`,
     iconSize: [20, 20],
     iconAnchor: [10, 10],
   })
@@ -218,7 +218,7 @@ function addMapTitle() {
 }
 
 function addWatermark() {
-  const watermarkControl = L.control({ position: "bottomleft" })
+  const watermarkControl = L.control({ position: "bottomright" })
   watermarkControl.onAdd = () => {
     const div = L.DomUtil.create("div", "map-watermark")
     div.innerHTML = `
