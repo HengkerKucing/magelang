@@ -108,13 +108,39 @@ const destinations = [
     fullDescription:
       "Gunung Merbabu adalah salah satu gunung favorit para pendaki di Jawa Tengah. Dengan ketinggian 3.145 mdpl, gunung ini menawarkan jalur pendakian yang menantang namun sangat memuaskan. Keunikan Gunung Merbabu terletak pada jalur pendakiannya yang hijau dengan padang rumput luas di beberapa pos. Dari puncaknya, pendaki dapat menikmati pemandangan yang luar biasa indah, termasuk view Gunung Merapi, Lawu, dan kota-kota di sekitarnya. Bunga edelweiss yang tumbuh di lereng gunung menambah daya tarik tersendiri.",
   },
+  {
+    id: 9,
+    name: "Air Terjun Sekumpul",
+    description: "Air terjun yang menawan dengan ketinggian 80 meter, dikelilingi hutan tropis yang asri.",
+    image: "/placeholder.svg?height=300&width=400",
+    category: "Air Terjun",
+    location: "Sekumpul, Magelang",
+    rating: 4.6,
+    features: ["Trekking", "Fotografi", "Berenang", "Alam"],
+    coordinates: [-7.3672, 110.1071],
+    fullDescription:
+      "Air Terjun Sekumpul adalah salah satu air terjun tertinggi di Magelang dengan ketinggian mencapai 80 meter. Dikelilingi oleh hutan tropis yang masih asri, air terjun ini menawarkan pengalaman yang menyegarkan bagi para pengunjung. Perjalanan menuju lokasi memerlukan trekking melalui jalur yang menantang namun pemandangan yang disajikan sangat memuaskan.",
+  },
+  {
+    id: 10,
+    name: "Gunung Tidar",
+    description: "Gunung kecil yang menawarkan panorama kota Magelang dan sekitarnya dari ketinggian.",
+    image: "/placeholder.svg?height=300&width=400",
+    category: "Gunung",
+    location: "Tidar, Magelang",
+    rating: 4.2,
+    features: ["Hiking", "Panorama", "Sejarah", "Mudah"],
+    coordinates: [-7.4672, 110.2171],
+    fullDescription:
+      "Gunung Tidar adalah gunung kecil yang terletak di pusat kota Magelang. Meskipun tidak tinggi, gunung ini menawarkan panorama yang indah dari kota Magelang dan daerah sekitarnya. Pendakian yang relatif mudah membuatnya cocok untuk pemula dan keluarga.",
+  },
 ]
 
 let displayedDestinations = 6
 
 function createDestinationCard(destination) {
   return `
-        <div class="destination-card card-hover-effect" onclick="openDestinationModal(${destination.id})">
+        <div class="destination-card" onclick="openDestinationModal(${destination.id})">
             <div class="destination-image">
                 <img src="${destination.image}" alt="${destination.name}" loading="lazy">
                 <div class="badge badge-${destination.category.toLowerCase().replace(" ", "-")}">${destination.category}</div>
@@ -136,11 +162,48 @@ function loadDestinations() {
   const destinationsToShow = destinations.slice(0, displayedDestinations)
 
   grid.innerHTML = destinationsToShow.map(createDestinationCard).join("")
+  
+  // Add fade-in animation to all cards
+  const cards = grid.querySelectorAll('.destination-card')
+  cards.forEach((card, index) => {
+    card.style.opacity = '0'
+    card.style.transform = 'translateY(30px)'
+    card.style.transition = 'all 0.6s ease-out'
+    
+    setTimeout(() => {
+      card.style.opacity = '1'
+      card.style.transform = 'translateY(0)'
+    }, index * 100 + 50)
+  })
 }
 
 function loadMoreDestinations() {
+  const previousCount = displayedDestinations
   displayedDestinations = Math.min(displayedDestinations + 3, destinations.length)
-  loadDestinations()
+  
+  const grid = document.getElementById("destinations-grid")
+  const destinationsToShow = destinations.slice(0, displayedDestinations)
+  grid.innerHTML = destinationsToShow.map(createDestinationCard).join("")
+  
+  // Add fade-in animation only to new cards
+  const cards = grid.querySelectorAll('.destination-card')
+  cards.forEach((card, index) => {
+    if (index < previousCount) {
+      // Existing cards - no animation needed
+      card.style.opacity = '1'
+      card.style.transform = 'translateY(0)'
+    } else {
+      // New cards - add animation
+      card.style.opacity = '0'
+      card.style.transform = 'translateY(30px)'
+      card.style.transition = 'all 0.6s ease-out'
+      
+      setTimeout(() => {
+        card.style.opacity = '1'
+        card.style.transform = 'translateY(0)'
+      }, (index - previousCount) * 150 + 100)
+    }
+  })
 
   if (displayedDestinations >= destinations.length) {
     const button = document.querySelector('button[onclick="loadMoreDestinations()"]')

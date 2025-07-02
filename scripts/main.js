@@ -347,77 +347,7 @@ function submitRegistration(event) {
 window.openImageModal = openImageModal
 window.closeImageModal = closeImageModal
 window.closeDestinationModal = closeDestinationModal
-window.loadMoreDestinations = () => {
-  const grid = document.getElementById("destinations-grid")
-  const button = event.target
-  
-  // Show loading state
-  button.innerHTML = '<div class="loading"></div> Memuat...'
-  button.disabled = true
-  
-  // Simulate API call delay
-  setTimeout(() => {
-    // Add more destination cards
-    const moreDestinations = [
-      {
-        title: "Air Terjun Sekumpul",
-        description: "Air terjun yang menawan dengan ketinggian 80 meter, dikelilingi hutan tropis yang asri.",
-        image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-        location: "Sekumpul, Magelang",
-        rating: "4.6"
-      },
-      {
-        title: "Punthuk Setumbu",
-        description: "Spot terbaik untuk melihat sunrise dengan pemandangan Candi Borobudur dan Gunung Merapi.",
-        image: "https://images.unsplash.com/photo-1570939274851-2d4b4c70d3bd?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-        location: "Borobudur, Magelang",
-        rating: "4.8"
-      },
-      {
-        title: "Gunung Tidar",
-        description: "Gunung kecil yang menawarkan panorama kota Magelang dan sekitarnya dari ketinggian.",
-        image: "https://images.unsplash.com/photo-1464822759844-d150baec0151?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-        location: "Tidar, Magelang",
-        rating: "4.3"
-      }
-    ]
-    
-    moreDestinations.forEach(dest => {
-      const card = document.createElement('div')
-      card.className = 'destination-card'
-      card.innerHTML = `
-        <div class="destination-image">
-          <img src="${dest.image}" alt="${dest.title}" loading="lazy">
-        </div>
-        <div class="destination-content">
-          <h3 class="destination-title">${dest.title}</h3>
-          <p class="destination-description">${dest.description}</p>
-          <div class="destination-meta">
-            <span>📍 ${dest.location}</span>
-            <span>⭐ ${dest.rating}</span>
-          </div>
-        </div>
-      `
-      grid.appendChild(card)
-    })
-    
-    // Hide button after loading more
-    button.style.display = 'none'
-    
-    // Add fade in animation to new cards
-    const newCards = grid.querySelectorAll('.destination-card:nth-last-child(-n+3)')
-    newCards.forEach((card, index) => {
-      card.style.opacity = '0'
-      card.style.transform = 'translateY(20px)'
-      setTimeout(() => {
-        card.style.transition = 'opacity 0.5s ease, transform 0.5s ease'
-        card.style.opacity = '1'
-        card.style.transform = 'translateY(0)'
-      }, index * 100)
-    })
-    
-  }, 1000)
-}
+// loadMoreDestinations function is handled by destinations.js
 
 window.scrollToSection = scrollToSection
 window.openRegistrationModal = openRegistrationModal
