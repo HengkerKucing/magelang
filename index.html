@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wisata Magelang - Jelajahi Keindahan Alam Jawa Tengah</title>
+    <meta name="description" content="Temukan keindahan wisata alam Magelang - dari Candi Borobudur hingga Gunung Merbabu. Panduan lengkap destinasi wisata terbaik di Jawa Tengah.">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Leaflet CSS for Map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/components.css">
+    <link rel="stylesheet" href="styles/responsive.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <h2>Wisata <span class="text-primary">Magelang</span></h2>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#beranda" class="nav-link">Beranda</a></li>
+                <li><a href="#tentang" class="nav-link">Tentang</a></li>
+                <li><a href="#destinasi" class="nav-link">Destinasi</a></li>
+                <li><a href="#peta" class="nav-link">Peta</a></li>
+                <li><a href="#kontak" class="nav-link">Kontak</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="beranda" class="hero">
+        <div class="hero-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+        </div>
+        <div class="hero-content">
+            <div class="container">
+                <h1 class="hero-title">Magelang Mempersembahkan</h1>
+                <p class="hero-subtitle">Keindahan Alam yang Memukau di Jantung Jawa Tengah</p>
+                <div class="hero-buttons">
+                    <a href="#destinasi" class="btn btn-primary">Jelajahi Sekarang</a>
+                    <a href="#tentang" class="btn btn-outline">Pelajari Lebih Lanjut</a>
+                </div>
+            
+            <!-- Hero Boxes -->
+            <div class="hero-boxes">
+                <div class="hero-box" onclick="scrollToSection('destinasi')">
+                    <div class="hero-box-icon">
+                        🏔️
+                    </div>
+                    <h3 class="hero-box-title">Destinasi Wisata</h3>
+                    <p class="hero-box-description">Jelajahi keindahan alam Magelang dari gunung hingga air terjun yang menakjubkan</p>
+                    <a href="#destinasi" class="hero-box-link">
+                        Lihat Destinasi
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
+                        </svg>
+                    </a>
+                </div>
+                
+                <div class="hero-box" onclick="scrollToSection('kontak')">
+                    <div class="hero-box-icon">
+                        🏨
+                    </div>
+                    <h3 class="hero-box-title">Akomodasi</h3>
+                    <p class="hero-box-description">Temukan penginapan terbaik untuk pengalaman menginap yang nyaman dan berkesan</p>
+                    <a href="#kontak" class="hero-box-link">
+                        Cari Akomodasi
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
+                        </svg>
+                    </a>
+                </div>
+                
+                <div class="hero-box" onclick="openRegistrationModal()">
+                    <div class="hero-box-icon">
+                        📝
+                    </div>
+                    <h3 class="hero-box-title">Registrasi Tour</h3>
+                    <p class="hero-box-description">Daftar untuk paket wisata guided tour dengan pemandu berpengalaman</p>
+                    <a href="#" class="hero-box-link">
+                        Daftar Sekarang
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="scroll-indicator">
+        <div class="scroll-arrow"></div>
+    </div>
+</section>
+
+    <!-- About Section -->
+    <section id="tentang" class="about section-padding">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Tentang Magelang</h2>
+                <p class="section-subtitle">Pesona Alam di Kaki Gunung Merapi dan Merbabu</p>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <div class="about-card">
+                        <h3>Lokasi Strategis</h3>
+                        <p><strong>Magelang</strong> terletak di Provinsi <strong>Jawa Tengah</strong>, Indonesia. Secara geografis, kabupaten ini berada di daerah dataran tinggi dengan sebagian wilayahnya berada di lereng <strong>Gunung Merapi</strong> dan <strong>Gunung Merbabu</strong>.</p>
+                        
+                        <h3>Kekayaan Alam</h3>
+                        <p>Kabupaten Magelang memiliki luas sekitar <strong>1.085 km²</strong>, yang sebagian besar berupa wilayah <strong>pegunungan</strong> dan <strong>perbukitan</strong>. Wilayah ini menawarkan panorama alam yang menakjubkan dengan udara sejuk pegunungan.</p>
+                        
+                        <h3>Destinasi Wisata</h3>
+                        <p>Magelang terkenal dengan berbagai objek <strong>wisata alam dan budaya</strong>, termasuk wisata alam di <strong>Gunung Merbabu</strong>, <strong>Gunung Sumbing</strong>, dan tentunya <strong>Candi Borobudur</strong> yang menjadi kebanggaan dunia.</p>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Pemandangan Magelang" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Destinations Section -->
+    <section id="destinasi" class="destinations section-padding">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Eksplorasi Keindahan Alam</h2>
+                <p class="section-subtitle">Nikmati panorama alam terbaik dari berbagai sudut Magelang</p>
+            </div>
+            <div class="destinations-grid" id="destinations-grid">
+                <!-- Destinations will be loaded by JavaScript -->
+            </div>
+            <div class="text-center mt-4">
+                <button class="btn btn-primary" onclick="loadMoreDestinations()">Lihat Lebih Banyak</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section id="peta" class="map-section section-padding">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Peta Wisata Magelang</h2>
+                <p class="section-subtitle">WebGIS Sebaran Wisata Alam Kabupaten Magelang</p>
+            </div>
+            <div class="map-container">
+                <div id="map" class="map">
+                    <div class="map-loading" id="mapLoading">
+                        <div class="loading-spinner"></div>
+                        <p>Memuat peta...</p>
+                    </div>
+                </div>
+                <div class="map-legend">
+                    <h4>Legenda</h4>
+                    <div class="legend-item">
+                        <span class="legend-marker tourist"></span>
+                        <span>Objek Wisata</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-marker mountain"></span>
+                        <span>Gunung</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-marker waterfall"></span>
+                        <span>Air Terjun</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="kontak" class="contact section-padding">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Hubungi Kami</h2>
+                <p class="section-subtitle">Butuh informasi lebih lanjut? Jangan ragu untuk menghubungi kami</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                            </svg>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Telepon</h4>
+                            <p><a href="tel:+6281227527941">+62 812-2752-7941</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                            </svg>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Email</h4>
+                            <p><a href="mailto:kelompoksipmagelang@company.com">kelompoksipmagelang@company.com</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                            </svg>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Lokasi</h4>
+                            <p>Semarang, Indonesia</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>Wisata <span class="text-primary">Magelang</span></h3>
+                    <p>Jelajahi keindahan alam Magelang dan temukan pengalaman tak terlupakan di jantung Jawa Tengah.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#beranda">Beranda</a></li>
+                        <li><a href="#tentang">Tentang</a></li>
+                        <li><a href="#destinasi">Destinasi</a></li>
+                        <li><a href="#peta">Peta</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#" class="social-link">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.174-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.097.118.112.221.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.402.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.357-.629-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24.009 12.017 24.009c6.624 0 11.99-5.367 11.99-11.988C24.007 5.367 18.641.001.012.001z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Wisata Magelang. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Image Modal -->
+    <div id="imageModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeImageModal()">&times;</span>
+            <img id="modalImage" src="/placeholder.svg" alt="Full size image">
+        </div>
+    </div>
+
+    <!-- Destination Modal -->
+    <div id="destinationModal" class="modal">
+        <div class="modal-content destination-modal">
+            <span class="close" onclick="closeDestinationModal()">&times;</span>
+            <div id="destinationModalContent"></div>
+        </div>
+    </div>
+
+    <!-- Registration Modal -->
+    <div id="registrationModal" class="modal">
+        <div class="modal-content registration-modal">
+            <span class="close" onclick="closeRegistrationModal()">&times;</span>
+            <div class="registration-content">
+                <h2>Registrasi Tour Wisata Magelang</h2>
+                <p>Daftar untuk mendapatkan pengalaman wisata terbaik dengan pemandu profesional</p>
+            
+                <form class="registration-form" onsubmit="submitRegistration(event)">
+                    <div class="form-group">
+                        <label for="fullName">Nama Lengkap</label>
+                        <input type="text" id="fullName" name="fullName" required>
+                    </div>
+                
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                
+                    <div class="form-group">
+                        <label for="phone">Nomor Telepon</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                
+                    <div class="form-group">
+                        <label for="tourPackage">Paket Wisata</label>
+                        <select id="tourPackage" name="tourPackage" required>
+                            <option value="">Pilih Paket Wisata</option>
+                            <option value="gunung">Paket Gunung (Merbabu & Andong)</option>
+                            <option value="air-terjun">Paket Air Terjun</option>
+                            <option value="budaya">Paket Wisata Budaya</option>
+                            <option value="lengkap">Paket Lengkap (3D2N)</option>
+                        </select>
+                    </div>
+                
+                    <div class="form-group">
+                        <label for="participants">Jumlah Peserta</label>
+                        <input type="number" id="participants" name="participants" min="1" max="20" required>
+                    </div>
+                
+                    <div class="form-group">
+                        <label for="tourDate">Tanggal Tour</label>
+                        <input type="date" id="tourDate" name="tourDate" required>
+                    </div>
+                
+                    <div class="form-group">
+                        <label for="message">Pesan Tambahan</label>
+                        <textarea id="message" name="message" rows="4" placeholder="Ceritakan kebutuhan khusus atau pertanyaan Anda..."></textarea>
+                    </div>
+                
+                    <button type="submit" class="btn btn-primary btn-full">Daftar Sekarang</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+    <script src="scripts/destinations.js"></script>
+    <script src="scripts/map.js"></script>
+    <script src="scripts/main.js"></script>
+</body>
+</html>
