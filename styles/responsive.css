@@ -126,22 +126,47 @@
     margin-bottom: 1.5rem;
   }
 
-  /* About Section */
+  /* About Section - Redesigned */
+  .about::before {
+    top: -30%;
+    right: -30%;
+    width: 60%;
+    height: 150%;
+  }
+
   .about-content {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 2.5rem;
   }
 
   .about-card {
-    padding: 1.5rem;
+    padding: 2rem;
+    border-radius: 20px;
   }
 
   .about-card h3 {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
+    gap: 0.8rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .about-card h3::before {
+    font-size: 1.5rem;
+  }
+
+  .about-card p {
+    font-size: 1rem;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
   }
 
   .about-image {
     order: -1;
+    border-radius: 20px;
+  }
+
+  .about-image:hover {
+    transform: scale(1.02) rotate(0deg);
   }
 
   /* Destinations */
@@ -272,6 +297,14 @@
     gap: 2.5rem;
   }
 
+  .about-card {
+    padding: 2.5rem;
+  }
+
+  .about-card h3 {
+    font-size: 1.5rem;
+  }
+
   /* Destinations */
   .destinations-grid {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -327,6 +360,14 @@
     gap: 4rem;
   }
 
+  .about-card {
+    padding: 2.8rem;
+  }
+
+  .about-card h3 {
+    font-size: 1.5rem;
+  }
+
   /* Destinations */
   .destinations-grid {
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -358,6 +399,10 @@
   /* About */
   .about-content {
     gap: 4.5rem;
+  }
+
+  .about-card {
+    padding: 3rem;
   }
 
   /* Destinations */
