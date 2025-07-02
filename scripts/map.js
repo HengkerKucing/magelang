@@ -1,10 +1,8 @@
-// Map initialization and configuration
 let map
 let markerClusters
 let geojsonLayers = {}
 const L = window.L
 
-// Layer styles configuration
 const layerStyles = {
   bataskabupaten: {
     color: '#e74c3c',
@@ -52,7 +50,6 @@ const layerStyles = {
 }
 
 function initializeMap() {
-  // Hide loading indicator when map loads
   const hideLoading = () => {
     const loadingEl = document.getElementById("mapLoading")
     if (loadingEl) {
@@ -60,7 +57,6 @@ function initializeMap() {
     }
   }
 
-  // Check if map container exists
   const mapContainer = document.getElementById("map")
   if (!mapContainer) {
     console.error("Map container not found")
@@ -68,10 +64,8 @@ function initializeMap() {
   }
 
   try {
-    // Create map centered on Magelang
     map = L.map("map").setView([-7.467241769266182, 110.25710938521335], 12)
 
-    // Add base layers
     const osmLayer = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
       maxZoom: 19,
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
@@ -87,9 +81,8 @@ function initializeMap() {
       subdomains: ['mt0','mt1','mt2','mt3'],
       maxZoom: 20,
       attribution: 'Google Satellite'
-    }).addTo(map) // Default active seperti kode lama
+    }).addTo(map)
 
-    // Layer control akan diupdate setelah semua layer dimuat
     window.baseLayers = {
       'Open Street Map': osmLayer,
       'Google Streets': googleStreets,
@@ -98,7 +91,6 @@ function initializeMap() {
     
     window.overlayLayers = {}
 
-    // Initialize marker clusters
     markerClusters = L.markerClusterGroup({
       spiderfyOnMaxZoom: true,
       showCoverageOnHover: true,
@@ -106,32 +98,25 @@ function initializeMap() {
       disableClusteringAtZoom: 15
     })
 
-    // Add initial layer control
     window.layerControl = L.control.layers(window.baseLayers, window.overlayLayers, {
       position: 'topright',
       collapsed: false
     }).addTo(map)
 
-    // Load data layers
     loadWisataLayer()
     loadBatasKecamatanLayer()
     loadJalanLayer()
-
-    // Add custom controls
     addMapTitle()
     addWatermark()
 
-    // Hide loading when map is ready
     map.whenReady(() => {
       hideLoading()
     })
 
-    // Force map to refresh after a short delay
     setTimeout(() => {
       map.invalidateSize()
     }, 100)
 
-    // Make map available globally
     window.map = map
   } catch (error) {
     console.error("Error initializing map:", error)
@@ -142,27 +127,25 @@ function initializeMap() {
   }
 }
 
-// Load wisata layer (menggunakan wisata.geojson yang tersedia)
 function loadWisataLayer() {
   const sebaranwisata = L.geoJson(null, {
     pointToLayer: function (feature, latlng) {
-      // Menentukan warna berdasarkan jenis wisata
-      let iconColor = '#4caf50' // default hijau untuk objek wisata
-      let iconSymbol = '📍' // default symbol
+      let iconColor = '#4caf50'
+      let iconSymbol = '📍'
       
       const name = feature.properties.Name?.toLowerCase() || ''
       
       if (name.includes('gunung')) {
-        iconColor = '#2196f3' // biru untuk gunung
+        iconColor = '#2196f3'
         iconSymbol = '🏔️'
       } else if (name.includes('air terjun') || name.includes('curug')) {
-        iconColor = '#ff9800' // orange untuk air terjun
+        iconColor = '#ff9800'
         iconSymbol = '💧'
       } else if (name.includes('hutan') || name.includes('pinus')) {
-        iconColor = '#4caf50' // hijau untuk hutan
+        iconColor = '#4caf50'
         iconSymbol = '🌲'
       } else if (name.includes('telaga') || name.includes('danau')) {
-        iconColor = '#00bcd4' // cyan untuk danau
+        iconColor = '#00bcd4'
         iconSymbol = '🏞️'
       }
 
@@ -191,7 +174,6 @@ function loadWisataLayer() {
           className: 'custom-popup'
         })
         
-        // Close other popups when this one opens
         layer.on('popupopen', function() {
           map.eachLayer(function(mapLayer) {
             if (mapLayer !== layer && mapLayer.isPopupOpen && mapLayer.isPopupOpen()) {
@@ -203,7 +185,6 @@ function loadWisataLayer() {
     }
   })
 
-  // Load dengan fetch API dan error handling yang lebih baik
   console.log("Loading wisata data...")
   
   fetch('data/wisata.geojson')
@@ -220,7 +201,6 @@ function loadWisataLayer() {
       markerClusters.addLayer(sebaranwisata)
       map.addLayer(markerClusters)
       
-      // Add to overlay control
       window.overlayLayers['🏞️ Wisata Alam'] = markerClusters
       updateLayerControl()
       
@@ -228,7 +208,6 @@ function loadWisataLayer() {
   })
     .catch(error => {
       console.error("Error loading wisata data:", error)
-      // Fallback dengan data hardcoded jika file tidak bisa diload
       const fallbackData = {
         "type": "FeatureCollection", 
         "features": [
@@ -247,11 +226,9 @@ function loadWisataLayer() {
       markerClusters.addLayer(sebaranwisata)
       map.addLayer(markerClusters)
       
-      // Add to overlay control
       window.overlayLayers['🏞️ Wisata Alam'] = markerClusters
       updateLayerControl()
       
-      // Zoom to fit all markers
       if (fallbackData.features.length > 0) {
         const group = new L.featureGroup(markerClusters.getLayers())
         map.fitBounds(group.getBounds().pad(0.1))
@@ -259,7 +236,6 @@ function loadWisataLayer() {
     })
 }
 
-// Load batas kecamatan layer
 function loadBatasKecamatanLayer() {
   const bataskecccColors = {
     "Bandongan": "#696969",
@@ -290,9 +266,9 @@ function loadBatasKecamatanLayer() {
       const kecamatan = feature.properties.KECAMATAN || feature.properties.bataskeccc || feature.properties.NAME
       return {
         fillColor: bataskecccColors[kecamatan] || "#CCCCCC",
-        fillOpacity: 0.4, // Lebih terlihat dari 0.2 ke 0.4
-        color: "#2c3e50", // Border lebih kontras
-        weight: 2, // Border lebih tebal agar jelas
+        fillOpacity: 0.4,
+        color: "#2c3e50",
+        weight: 2, 
         opacity: 1
       }
     },
@@ -312,7 +288,6 @@ function loadBatasKecamatanLayer() {
           className: 'custom-popup kecamatan-popup'
         })
         
-        // Close other popups when this one opens
         layer.on('popupopen', function() {
           map.eachLayer(function(mapLayer) {
             if (mapLayer !== layer && mapLayer.isPopupOpen && mapLayer.isPopupOpen()) {
@@ -324,7 +299,6 @@ function loadBatasKecamatanLayer() {
     }
   })
 
-  // Load batas kecamatan data dengan fallback
   console.log("Loading batas kecamatan data...")
   
   fetch('data/bataskeccc.geojson')
@@ -340,7 +314,6 @@ function loadBatasKecamatanLayer() {
       bataskeccc.addData(data)
       map.addLayer(bataskeccc)
       
-      // Add to overlay control
       window.overlayLayers['🏘️ Batas Kecamatan'] = bataskeccc
       updateLayerControl()
       
@@ -350,7 +323,6 @@ function loadBatasKecamatanLayer() {
       console.error("Error loading kecamatan data:", error)
       console.log("Using fallback kecamatan data - sample areas")
       
-      // Fallback data untuk beberapa kecamatan sample
       const fallbackKecamatan = {
         "type": "FeatureCollection",
         "features": [
@@ -380,7 +352,6 @@ function loadBatasKecamatanLayer() {
       bataskeccc.addData(fallbackKecamatan)
       map.addLayer(bataskeccc)
       
-      // Add to overlay control
       window.overlayLayers['🏘️ Batas Kecamatan'] = bataskeccc
       updateLayerControl()
       
@@ -388,7 +359,6 @@ function loadBatasKecamatanLayer() {
     })
 }
 
-// Load jalan layer
 function loadJalanLayer() {
   const jalanColors = {
     "Arteri": "#FF0000",
@@ -402,12 +372,11 @@ function loadJalanLayer() {
       const warna = jalanColors[fungsi] || "#000000"
       return {
         color: warna,
-        weight: 1.5, // Lebih tipis
-        opacity: 0.6 // Lebih transparan
+        weight: 1.5,
+        opacity: 0.6 
       }
     },
     onEachFeature: function (feature, layer) {
-      // Hover effects
       layer.on({
         mouseover: function (e) {
           const layer = e.target
@@ -436,8 +405,7 @@ function loadJalanLayer() {
           maxWidth: 250,
           className: 'custom-popup jalan-popup'
         })
-        
-        // Close other popups when this one opens  
+         
         layer.on('popupopen', function() {
           map.eachLayer(function(mapLayer) {
             if (mapLayer !== layer && mapLayer.isPopupOpen && mapLayer.isPopupOpen()) {
@@ -449,7 +417,7 @@ function loadJalanLayer() {
     }
   })
 
-  // Load jalan data dengan fallback  
+
   console.log("Loading jalan data...")
   
   fetch('data/JALAN.geojson')
@@ -465,7 +433,7 @@ function loadJalanLayer() {
       JALAN.addData(data)
       map.addLayer(JALAN)
       
-      // Add to overlay control
+
       window.overlayLayers['🛣️ Jalan'] = JALAN
       updateLayerControl()
       
@@ -475,7 +443,6 @@ function loadJalanLayer() {
       console.error("Error loading jalan data:", error)
       console.log("Using fallback jalan data - main roads only")
       
-      // Fallback data untuk jalan utama saja
       const fallbackJalan = {
         "type": "FeatureCollection",
         "features": [
@@ -505,7 +472,6 @@ function loadJalanLayer() {
       JALAN.addData(fallbackJalan)
       map.addLayer(JALAN)
       
-      // Add to overlay control
       window.overlayLayers['🛣️ Jalan'] = JALAN
       updateLayerControl()
       
@@ -546,7 +512,6 @@ function addWatermark() {
 }
 
 function showAttractionDetails(name) {
-  // Try to find destination in the global destinations array
   if (window.destinations) {
     const destination = window.destinations.find((d) => d.name === name || d.name.includes(name))
   if (destination) {
@@ -557,25 +522,20 @@ function showAttractionDetails(name) {
   }
   }
   
-  // Fallback: show alert with basic info
   alert(`Detail untuk ${name} akan segera tersedia.`)
 }
 
-// Update layer control with current layers
 function updateLayerControl() {
-  // Remove existing layer control if any
   if (window.layerControl) {
     map.removeControl(window.layerControl)
   }
   
-  // Create new layer control with all available layers
   window.layerControl = L.control.layers(window.baseLayers, window.overlayLayers, {
     position: 'topright',
-    collapsed: false // Show expanded by default
+    collapsed: false
   }).addTo(map)
 }
 
-// Initialize map when DOM is loaded
 document.addEventListener("DOMContentLoaded", () => {
   const mapSection = document.getElementById("peta")
   if (mapSection) {
@@ -593,6 +553,5 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 })
 
-// Export functions for global use
 window.geojsonLayers = geojsonLayers
 window.showAttractionDetails = showAttractionDetails

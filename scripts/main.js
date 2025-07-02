@@ -1,6 +1,4 @@
-// Main JavaScript functionality
 document.addEventListener("DOMContentLoaded", () => {
-  // Initialize all components
   initializeNavigation()
   initializeScrollEffects()
   initializeModals()
@@ -8,20 +6,17 @@ document.addEventListener("DOMContentLoaded", () => {
   initializeLazyLoading()
 })
 
-// Navigation functionality
 function initializeNavigation() {
   const navbar = document.getElementById("navbar")
   const hamburger = document.getElementById("hamburger")
   const navMenu = document.getElementById("nav-menu")
   const navLinks = document.querySelectorAll(".nav-link")
 
-  // Mobile menu toggle
   hamburger.addEventListener("click", () => {
     hamburger.classList.toggle("active")
     navMenu.classList.toggle("active")
   })
 
-  // Close mobile menu when clicking on a link
   navLinks.forEach((link) => {
     link.addEventListener("click", () => {
       hamburger.classList.remove("active")
@@ -29,7 +24,6 @@ function initializeNavigation() {
     })
   })
 
-  // Navbar scroll effect
   window.addEventListener("scroll", () => {
     if (window.scrollY > 100) {
       navbar.classList.add("scrolled")
@@ -38,7 +32,6 @@ function initializeNavigation() {
     }
   })
 
-  // Active navigation link
   window.addEventListener("scroll", () => {
     let current = ""
     const sections = document.querySelectorAll("section[id]")
@@ -60,21 +53,17 @@ function initializeNavigation() {
   })
 }
 
-// Scroll effects and animations
 function initializeScrollEffects() {
-  // Smooth scrolling for anchor links with navbar offset
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener("click", function (e) {
       e.preventDefault()
       const target = document.querySelector(this.getAttribute("href"))
       if (target) {
-        // Get navbar height for offset
         const navbar = document.getElementById("navbar")
         const navbarHeight = navbar ? navbar.offsetHeight : 80
         
-        // Calculate scroll position with offset
         const elementPosition = target.getBoundingClientRect().top + window.pageYOffset
-        const offsetPosition = elementPosition - navbarHeight - 20 // 20px extra padding
+        const offsetPosition = elementPosition - navbarHeight - 20
         
         window.scrollTo({
           top: offsetPosition,
@@ -84,7 +73,6 @@ function initializeScrollEffects() {
     })
   })
 
-  // Scroll to top functionality
   const scrollToTopBtn = createScrollToTopButton()
 
   window.addEventListener("scroll", () => {
@@ -137,9 +125,7 @@ function createScrollToTopButton() {
   return button
 }
 
-// Modal functionality
 function initializeModals() {
-  // Close modals when clicking outside
   window.addEventListener("click", (event) => {
     const imageModal = document.getElementById("imageModal")
     const destinationModal = document.getElementById("destinationModal")
@@ -156,7 +142,6 @@ function initializeModals() {
     }
   })
 
-  // Close modals with Escape key
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") {
       closeImageModal()
@@ -166,7 +151,6 @@ function initializeModals() {
   })
 }
 
-// Image modal functions
 function openImageModal(imageSrc) {
   const modal = document.getElementById("imageModal")
   const modalImage = document.getElementById("modalImage")
@@ -181,14 +165,12 @@ function closeImageModal() {
   document.body.style.overflow = "auto"
 }
 
-// Destination modal function
 function closeDestinationModal() {
   const modal = document.getElementById("destinationModal")
   modal.style.display = "none"
   document.body.style.overflow = "auto"
 }
 
-// Animation on scroll
 function initializeAnimations() {
   const observerOptions = {
     threshold: 0.1,
@@ -204,7 +186,6 @@ function initializeAnimations() {
     })
   }, observerOptions)
 
-  // Observe elements for animation
   const animatedElements = document.querySelectorAll(".destination-card, .about-card, .contact-card")
   animatedElements.forEach((el) => {
     el.style.opacity = "0"
@@ -214,7 +195,6 @@ function initializeAnimations() {
   })
 }
 
-// Lazy loading for images
 function initializeLazyLoading() {
   const imageObserver = new IntersectionObserver((entries, observer) => {
     entries.forEach((entry) => {
@@ -233,7 +213,6 @@ function initializeLazyLoading() {
   })
 }
 
-// Utility functions
 function debounce(func, wait) {
   let timeout
   return function executedFunction(...args) {
@@ -259,9 +238,7 @@ function throttle(func, limit) {
   }
 }
 
-// Performance optimizations
 const debouncedResize = debounce(() => {
-  // Handle resize events - check if map exists globally
   if (typeof window.map !== "undefined" && window.map && typeof window.map.invalidateSize === "function") {
     window.map.invalidateSize()
   }
@@ -269,7 +246,6 @@ const debouncedResize = debounce(() => {
 
 window.addEventListener("resize", debouncedResize)
 
-// Loading state management
 function showLoading(element) {
   element.innerHTML = '<div class="loading"></div>'
 }
@@ -278,13 +254,10 @@ function hideLoading(element, content) {
   element.innerHTML = content
 }
 
-// Error handling
 window.addEventListener("error", (event) => {
   console.error("JavaScript error:", event.error)
-  // You could implement user-friendly error messages here
 })
 
-// Service worker registration (for PWA capabilities)
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
     navigator.serviceWorker
@@ -298,23 +271,18 @@ if ("serviceWorker" in navigator) {
   })
 }
 
-// Analytics and tracking (placeholder)
 function trackEvent(category, action, label) {
-  // Implement your analytics tracking here
   console.log("Event tracked:", { category, action, label })
 }
 
-// Hero box functionality
 function scrollToSection(sectionId) {
   const section = document.getElementById(sectionId)
   if (section) {
-    // Get navbar height for offset
     const navbar = document.getElementById("navbar")
     const navbarHeight = navbar ? navbar.offsetHeight : 80
     
-    // Calculate scroll position with offset
     const elementPosition = section.getBoundingClientRect().top + window.pageYOffset
-    const offsetPosition = elementPosition - navbarHeight - 20 // 20px extra padding
+    const offsetPosition = elementPosition - navbarHeight - 20
     
     window.scrollTo({
       top: offsetPosition,
@@ -323,7 +291,6 @@ function scrollToSection(sectionId) {
   }
 }
 
-// Registration modal functions
 function openRegistrationModal() {
   const modal = document.getElementById("registrationModal")
   modal.style.display = "block"
@@ -339,11 +306,9 @@ function closeRegistrationModal() {
 function submitRegistration(event) {
   event.preventDefault()
 
-  // Get form data
   const formData = new FormData(event.target)
   const data = Object.fromEntries(formData)
 
-  // Show success message
   const form = event.target
   form.innerHTML = `
     <div class="success-message">
@@ -353,17 +318,14 @@ function submitRegistration(event) {
     </div>
   `
 
-  // Track event
   trackEvent("Registration", "Submit", data.tourPackage)
 
   console.log("Registration data:", data)
 }
 
-// Export functions for global use
 window.openImageModal = openImageModal
 window.closeImageModal = closeImageModal
 window.closeDestinationModal = closeDestinationModal
-// loadMoreDestinations function is handled by destinations.js
 
 window.scrollToSection = scrollToSection
 window.openRegistrationModal = openRegistrationModal

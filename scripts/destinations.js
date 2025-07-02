@@ -1,4 +1,3 @@
-// Destinations data
 const destinations = [
   {
     id: 1,
@@ -163,7 +162,6 @@ function loadDestinations() {
 
   grid.innerHTML = destinationsToShow.map(createDestinationCard).join("")
   
-  // Add fade-in animation to all cards
   const cards = grid.querySelectorAll('.destination-card')
   cards.forEach((card, index) => {
     card.style.opacity = '0'
@@ -185,15 +183,12 @@ function loadMoreDestinations() {
   const destinationsToShow = destinations.slice(0, displayedDestinations)
   grid.innerHTML = destinationsToShow.map(createDestinationCard).join("")
   
-  // Add fade-in animation only to new cards
   const cards = grid.querySelectorAll('.destination-card')
   cards.forEach((card, index) => {
     if (index < previousCount) {
-      // Existing cards - no animation needed
       card.style.opacity = '1'
       card.style.transform = 'translateY(0)'
     } else {
-      // New cards - add animation
       card.style.opacity = '0'
       card.style.transform = 'translateY(30px)'
       card.style.transition = 'all 0.6s ease-out'
@@ -264,8 +259,6 @@ function closeDestinationModal() {
   document.getElementById("destinationModal").style.display = "none"
 }
 
-// Initialize destinations on page load
 document.addEventListener("DOMContentLoaded", loadDestinations)
 
-// Make destinations available globally
 window.destinations = destinations
